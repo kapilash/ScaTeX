@@ -1,0 +1,33 @@
+This package aims to support literate programming in scala.
+
+It can be treated more as an (unscientific) experiment to understand some of the following:
+(a) Is literate programming any good?
+(b) Is Literate programming really relevant for high level (functional) languages like scala?
+(c) Does it provide a better way of opening one's source  ?
+
+
+The pre-zeroth step is to have a simple working tool (XeT) that lets us experiment with this style for some real programs.
+
+XeT:
+XeT is a simple standalone program written in (literate) haskell 
+It takes a file containing literate source code and generates a TeX file and a program file. (Unlike, say, cweb, the source code is, at least currently, totally 
+readable). 
+
+
+Building the tool:
+ghc --make -O2 XeT.lhs
+
+Using XeT
+XeT fileName
+ 
+where fileName.lxt is the file containing the literate source
+
+
+It is ideally suited for  language where comments are surrounded with  '/*' - '*/' and with '//' - newline.
+While one cannot work with IDEs and stuff yet, (especially when you have many 'link's), with editors like emacs, one just have to open the lxt file and say 
+ALT-x (scala-mode or csharp-mode or c-mode) or whateva.
+
+
+
+The immediate focus is to write a few literate programs in scala - hopefully those that are not already present in scala.
+And based on the experience, add features to the tool (if necessary, convert it into scala) 
