@@ -1,0 +1,14 @@
+*~
+*.o
+*.hi
+*.class
+*.exe
+*.tex
+XeT
+*.mp
+*.log
+*.pdf
+*.tui
+*.tmp
+*.junk
+*.tuo
