@@ -1,0 +1,18 @@
+Keywords are this , super , forSome , type , val , with , if , while , try , for , do , finally , return , match , new , case , override ,
+             abstract , final , sealed , implicit , lazy , private , public , protected ,  import , package , def , trait ,  extends , class , object .
+
+colors {
+  true => darkblue
+  false => darkblue
+  TypeVariable => darkmagenta
+  main => blue
+  println => middlered
+  Comments => gray
+  Number => middlegreen
+  Character => middlegreen
+  String => magenta
+  Keyword => darkred
+  Symbol => darkblue
+}
+  
+  
