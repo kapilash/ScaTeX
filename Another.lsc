@@ -1,0 +1,25 @@
+
+\starttext
+\define[1]\File{{\bf code file:} #1}
+\startstandardmakeup
+\midaligned{{\tfd HelloWorld in ScaTeX}}
+\midaligned{by}
+\midaligned{Kapilash}
+\stopstandardmakeup
+\completecontent
+\chapter{Introduction}
+The very famous program in ScaTeX.
+
+\begin{code}
+
+object HelloWorld{
+  def main(args:Array[String]){
+    println("Hello World")
+  }
+}
+
+\end{code}
+\File{"HelloWorld.scala"}
+
+
+\stoptext
