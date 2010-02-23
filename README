@@ -3,29 +3,53 @@ This package aims to support literate programming in scala.
 It can be treated more as an (unscientific) experiment to understand some of the following:
 (a) Is literate programming any good?
 (b) Is Literate programming really relevant for high level (functional) languages like scala?
-(c) Does it provide a better way of opening one's source  ?
+(c) Does it provide a better way of opening one's source code - (as opposed to the traditional form of giving away the full source code as is) ?
 
 
-The pre-zeroth step is to have a simple working tool (XeT) that lets us experiment with this style for some real programs.
+The pre-zeroth step is to have a simple working tool (ScaTeX) that lets us experiment with this style for some real programs.
 
-XeT:
-XeT is a simple standalone program written in (literate) haskell 
-It takes a file containing literate source code and generates a TeX file and a program file. (Unlike, say, cweb, the source code is, at least currently, totally 
-readable). 
+ScaTeX, currently, is tightly coupled with  conTeXt (http://wiki.contextgarden.net/)
 
+There are two stand alone programs:
+
+STangle.
+It generates one or more source code files from a given literate file. 
+To Run, say
+scala com.github.lp.STangle [mode] fileName
+
+Each code section will be surrounded with  '\begin{code}' and '\end{code}'.
+This should be followed by a file command.
+\File{""} (where the path of the target code file is to be given) (No spaces are allowed between any two of 'file','{',string-literal and the '}'.
+There can be any number of empty spaces between the '\end{code}' and the file command.
+
+The necessary  parent directories are created.
+
+If the file command is not provided, the code is sent to the previous one.
+If there's no file command at all, the output goes to Stangle.out file in the current directory.
+
+This tool takes upto  two command line arguments :-
+fileName: mandatory argument containing the literate source code
+"mode" : It is optional. mode can be scala or haskell or final. Depending on the mode, it generates the appropriate comments at the end of the line containing
+the line numbers of the same code in the literate source file. (This approach makes sense for haskell mode, only when the file command is used)
+
+
+ScaTeX
+This code take the literate source file and 'decorates' the source code as per the keywords and color groups given in a context file.
+scala com.github.lp.ScaTeX  [mode] fileName [ContextFile]
+
+mode is currently useless
+ContextFile contains directives for syntax coloring
+fileName contains the literate source file.
 
 Building the tool:
-ghc --make -O2 XeT.lhs
-
-Using XeT
-XeT fileName
- 
-where fileName.lxt is the file containing the literate source
+fsc *.scala
 
 
-It is ideally suited for  language where comments are surrounded with  '/*' - '*/' and with '//' - newline.
-While one cannot work with IDEs and stuff yet, (especially when you have many 'link's), with editors like emacs, one just have to open the lxt file and say 
-ALT-x (scala-mode or csharp-mode or c-mode) or whateva.
+The road map:
+* emacs mode
+* support to converting directly to postscript 
+
+
 
 
 
