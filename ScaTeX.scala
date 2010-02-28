@@ -24,18 +24,18 @@ class SKEnvironment(val ctx:ContextInfo, val mode:RunMode.Value){
 
   def decorateVariable(str:String):String = if (ctx.keywords.contains(str)){
     genDecorate(str,"Keyword","darkred")
-  }else{
-    if (str.charAt(0) <= 'Z'){
-      genDecorate(str,"TypeVariable","darkgreen")
-    }else{
-      ctx.wordColorMap.get(str) match {
-	case None => str
+  }else  ctx.wordColorMap.get(str) match {
+       case None =>    if (str.charAt(0) <= 'Z'){
+			 genDecorate(str,"TypeVariable","darkgreen")
+		       } else
+                       str
 	case Some(clr) => "\\color["+ clr + "]{" + str + "}"
-      }
-    }
-  }
 
-  def decorateStringLiteral(str:String):String = genDecorate(str,"String","magenta")
+  }
+  
+
+  def decorateStringLiteral(str:String):String = "\\quotation{" + str + "}"
+//genDecorate(str,"String","magenta")
 
   def decorateCharLiteral(str:String):String = genDecorate(str,"Character","middlemagenta")
 
@@ -114,14 +114,14 @@ object ScaTeX{
 				    currLine = currLine + 1
 				  }
 	  case TokenType.SimpleWord => env.addNode(new StringNode("\\type{" + currToken.str + "}"))
-	  case TokenType.Variable => env.addNode(new StringNode(env.decorateVariable(currToken.str)))
+	  case TokenType.Variable =>   env.addNode(new StringNode(env.decorateVariable(currToken.str)))
 	  case TokenType.CBraceOpen => env.addNode(new StringNode("{\\bf \\{}"))
 	  case TokenType.CBraceClose => env.addNode(new StringNode("{\\bf \\}}"))
 	  case TokenType.SBraceOpen => env.addNode(new StringNode("{\\bf " +currToken.str + "}"))
 	  case TokenType.SBraceClose => env.addNode(new StringNode("{\\bf " +currToken.str + "}"))
           case TokenType.StringLiteral => {
 	    val str = currToken.str.substring(1,currToken.str.length - 1)
-	    val quoted = "\\quotation{"+str + "}"
+	    val quoted = "\\type{"+str + "}"
 	    val decstr = env.decorateStringLiteral(quoted)
 	    env.addNode(new StringNode(decstr))
 	  }

@@ -39,6 +39,7 @@ object TokenType extends Enumeration{
   val Hash = Value("#")
   val And = Value("&")
   val Percent = Value("%")
+  val UnderScore = Value("_")
 
   val Symbol = Value("Symbol")
 
@@ -93,7 +94,8 @@ class LitLexer extends JavaTokenParsers{
                               hashSymbol |
                               dollarSymbol |
                               andSymbol |
-                              percentSymbol |                              
+                              percentSymbol |
+                              underScore |                              
                               newLine |
                               space  |
                               splChar |
@@ -154,6 +156,7 @@ class LitLexer extends JavaTokenParsers{
 
   def andSymbol:Parser[Token] = "&" ^^ ((x) => makeToken(x,TokenType.And))
   def percentSymbol:Parser[Token] = "%" ^^ ((x) => makeToken(x,TokenType.Percent))
+  def underScore : Parser[Token] = "_" ^^ ((x) => makeToken(x,TokenType.UnderScore))
 
   def codeStart:Parser[Token] = """\\begin\{code\}""".r ^^ ((x) => makeToken(x,TokenType.CodeBegin))
   def codeEnd:Parser[Token] = """\\end\{code\}""".r ^^ ((x) => makeToken(x,TokenType.CodeEnd))
