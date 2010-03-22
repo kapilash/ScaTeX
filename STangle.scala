@@ -51,6 +51,7 @@ object STangle{
       case allTokens => {
 	val (_,rest1) = Utils.splitTillToken(TokenType.CodeBegin,allTokens,List())
 	val (code,rest) = Utils.splitTillToken(TokenType.CodeEnd,rest1,List())
+
 	doCodeSection(code,env)
 	val checklst:List[Token] = Utils.dropEmptySpaces(rest)
         checklst match {
@@ -70,7 +71,10 @@ object STangle{
                
                
 	  }
-	  case _ => runTokens(rest,env)
+	  case _ =>{
+           env.appendBlockToCurrentFile()
+           runTokens(rest,env)
+          }
 	}
       }
     }
@@ -119,6 +123,7 @@ object STangle{
    val mode = tuple._1
    
    val allTokens:List[Token] = Tokenizer.getTokens(codeFile)
+
 
    val environment = TangleEnv(mode)
    runTokens(allTokens,environment)

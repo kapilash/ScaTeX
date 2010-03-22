@@ -34,7 +34,7 @@ class SKEnvironment(val ctx:ContextInfo, val mode:RunMode.Value){
   }
   
 
-  def decorateStringLiteral(str:String):String = "\\quotation{" + str + "}"
+  def decorateStringLiteral(str:String):String = genDecorate("\\quotation{" + str + "}","String","magenta")
 //genDecorate(str,"String","magenta")
 
   def decorateCharLiteral(str:String):String = genDecorate(str,"Character","middlemagenta")
