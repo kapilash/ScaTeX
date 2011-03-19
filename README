@@ -53,5 +53,9 @@ The road map:
 
 
 
-The immediate focus is to write a few literate programs in scala - hopefully those that are not already present in scala.
-And based on the experience, add features to the tool (if necessary, convert it into scala) 
+Next steps:
+a. Changing mode of implementation back to haskell.
+b. Implementing a new lexer
+c. Support for writing or generating API docs
+d. Integration with compilers
+
